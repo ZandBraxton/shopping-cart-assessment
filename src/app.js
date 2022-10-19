@@ -3,6 +3,7 @@ const cors = require("cors");
 
 const { db } = require("./db");
 const { cartRouter } = require("./routes/cartRouter");
+const { productRouter } = require("./routes/productRouter");
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.get("/", (req, res, next) => {
   res.send("hello world");
 });
 
+app.use("/products", productRouter);
 app.use("/cart", cartRouter);
 
 app.listen(port, () => {
