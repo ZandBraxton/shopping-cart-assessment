@@ -4,18 +4,24 @@ const {
   getCart,
   deleteFromCart,
   checkoutCart,
+  updateCart,
 } = require("../controllers/cartcontroller");
 
 const cartRouter = express.Router();
+
+//check auth on all
 
 //get cart
 cartRouter.get("/", getCart);
 
 //add to cart
-cartRouter.post("/", addToCart);
+cartRouter.post("/add", addToCart);
 
 //delete from cart
-cartRouter.delete("/", deleteFromCart);
+cartRouter.delete("/delete/:productId", deleteFromCart);
+
+//update quantity of cart
+cartRouter.put("/update", updateCart);
 
 //checkout
 cartRouter.post("/checkout", checkoutCart);

@@ -5,8 +5,8 @@ const ItemSchema = new Schema(
   {
     productId: { type: String },
     quantity: { type: Number, required: true, min: 1 },
-    price: { type: Number, required: true },
-    total: { type: Number, required: true },
+    price: { type: String, required: true },
+    total: { type: String, required: true },
   },
   {
     timestamps: true,
@@ -16,7 +16,7 @@ const ItemSchema = new Schema(
 const CartSchema = new Schema({
   items: [ItemSchema],
   subTotal: {
-    type: Number,
+    type: String,
     default: 0,
   },
 });
