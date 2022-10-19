@@ -8,19 +8,19 @@
   {
     "name": "Fresh Bunch of Bananas",
     "productId": "2",
-    "price": 1.54,
+    "price": "1.54",
     "image": "https://images.heb.com/is/image/HEBGrocery/000377497-1?id=aOaTd2&fmt=jpg&dpr=off&fit=constrain,1&wid=296&hei=296"
   },
   {
     "name": "Dish Soap",
     "productId": "3",
-    "price": 12.99,
+    "price": "12.99",
     "image": "https://images.heb.com/is/image/HEBGrocery/002044324-1?id=5YBR73&fmt=jpg&dpr=off&fit=constrain,1&wid=296&hei=296"
   },
   {
     "name": "Nonstick Fry Pan",
     "productId": "4",
-    "price": 20.6,
+    "price": "20.60",
     "image": "https://images.heb.com/is/image/HEBGrocery/002044324-1?id=5YBR73&fmt=jpg&dpr=off&fit=constrain,1&wid=296&hei=296"
   }
 ]
