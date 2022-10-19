@@ -8,8 +8,10 @@ const { productRouter } = require("./routes/productRouter");
 
 const app = express();
 
+const allowedOrigins = [process.env.CORS_ORIGIN, process.env.CLIENT_ORIGIN];
+
 const options = {
-  origin: process.env.CORS_ORIGIN,
+  origin: allowedOrigins,
 };
 
 db(app);
