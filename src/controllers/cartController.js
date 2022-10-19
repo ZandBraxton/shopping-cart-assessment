@@ -31,7 +31,6 @@ async function getCart(req, res, next) {
 
 async function addToCart(req, res, next) {
   try {
-    console.log(req.body);
     const productId = req.body.productId;
     const quantity = parseInt(req.body.quantity);
 
