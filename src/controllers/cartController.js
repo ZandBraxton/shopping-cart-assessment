@@ -1,5 +1,9 @@
 const express = require("express");
-const { findCart, addItem } = require("../helpers/cartHelpers");
+const {
+  findCart,
+  createCart,
+  calculateSubTotal,
+} = require("../helpers/cartHelpers");
 const { findProduct } = require("../helpers/productHelpers");
 const { Cart } = require("../models/cartModel");
 
@@ -53,9 +57,7 @@ async function addToCart(req, res, next) {
       cart.items[index].price = product.price;
     }
     //calculate subtotal
-    cart.subTotal = cart.items
-      .map((item) => item.total)
-      .reduce((acc, next) => acc + next);
+    await calculateSubTotal(cart);
 
     const data = await cart.save();
     res.status(200).json({
@@ -77,9 +79,43 @@ async function addToCart(req, res, next) {
       subTotal: product.price * quantity,
     };
 
-    const data = await addItem(newCart);
+    const data = await createCart(newCart);
     res.json(data);
   }
 }
 
-module.exports = { addToCart, getCart };
+async function deleteFromCart(req, res, next) {
+  const cart = await findCart();
+  const productId = req.body.productId;
+  if (cart) {
+    cart.items = cart.items.filter((item) => item.productId !== productId);
+    if (!cart.items.length) {
+      //empty cart
+      cart.subTotal = 0;
+    } else {
+      await calculateSubTotal(cart);
+    }
+    const data = await cart.save();
+
+    return res.status(200).json({
+      type: "success",
+      data: data,
+    });
+  }
+}
+
+async function checkoutCart(req, res, next) {
+  const cart = await findCart();
+  if (cart) {
+    cart.items = [];
+    cart.subTotal = 0;
+    const data = await cart.save();
+
+    return res.status(200).json({
+      type: "success",
+      data: data,
+    });
+  }
+}
+
+module.exports = { addToCart, getCart, deleteFromCart, checkoutCart };
