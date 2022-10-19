@@ -18,10 +18,7 @@ async function getCart(req, res, next) {
       });
     }
 
-    return res.status(200).json({
-      type: "success",
-      data: cart,
-    });
+    return res.status(200).json(cart);
   } catch (error) {
     console.log(error);
     res.status(400).json({
@@ -34,6 +31,7 @@ async function getCart(req, res, next) {
 
 async function addToCart(req, res, next) {
   try {
+    console.log(req.body);
     const productId = req.body.productId;
     const quantity = parseInt(req.body.quantity);
 
@@ -60,6 +58,8 @@ async function addToCart(req, res, next) {
       if (index === -1) {
         cart.items.push({
           productId: productId,
+          name: product.name,
+          image: product.image,
           quantity: quantity,
           price: product.price,
           total: (product.price * quantity).toFixed(2),
@@ -77,31 +77,25 @@ async function addToCart(req, res, next) {
       await calculateSubTotal(cart);
 
       const data = await cart.save();
-      return res.status(200).json({
-        type: "success",
-        message: "Data updated successfully",
-        data: data,
-      });
+      return res.status(200).json(data);
     } else {
       //new cart
       const newCart = {
         items: [
           {
             productId: productId,
+            name: product.name,
+            image: product.image,
             quantity: quantity,
             price: product.price,
             total: (product.price * quantity).toFixed(2),
           },
         ],
-        subTotal: product.price * quantity,
+        subTotal: (product.price * quantity).toFixed(2),
       };
 
       const data = await createCart(newCart);
-      return res.status(201).json({
-        type: "success",
-        message: "Data created successfully",
-        data: data,
-      });
+      return res.status(201).json(data);
     }
   } catch (error) {
     console.log(error);
@@ -127,10 +121,7 @@ async function deleteFromCart(req, res, next) {
       }
       const data = await cart.save();
 
-      return res.status(200).json({
-        type: "success",
-        data: data,
-      });
+      return res.status(200).json(data);
     }
   } catch (error) {
     console.log(error);
@@ -177,10 +168,7 @@ async function updateCart(req, res, next) {
 
           const data = await cart.save();
 
-          return res.status(200).json({
-            type: "success",
-            data: data,
-          });
+          return res.status(200).json(data);
         } else {
           cart.items[index].quantity = cart.items[index].quantity = quantity;
           cart.items[index].total = (
@@ -193,10 +181,7 @@ async function updateCart(req, res, next) {
 
         const data = await cart.save();
 
-        return res.status(200).json({
-          type: "success",
-          data: data,
-        });
+        return res.status(200).json(cart.items[index]);
       } else {
         return res.status(500).json({
           type: "Product not found",
@@ -224,10 +209,7 @@ async function checkoutCart(req, res, next) {
 
       //process payment/save order in database (users)
 
-      return res.status(200).json({
-        type: "success",
-        data: data,
-      });
+      return res.status(200).json(data);
     }
   } catch (error) {
     console.log(error);

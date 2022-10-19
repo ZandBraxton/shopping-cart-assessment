@@ -13,17 +13,11 @@ async function getProduct(req, res, next) {
     });
   }
 
-  return res.status(200).json({
-    type: "success",
-    data: product,
-  });
+  return res.status(200).json(product);
 }
 
 async function getAllProducts(req, res, next) {
-  return res.status(200).json({
-    type: "success",
-    data: products,
-  });
+  return res.status(200).json(products);
 }
 
 module.exports = { getProduct, getAllProducts };

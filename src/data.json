@@ -2,7 +2,7 @@
   {
     "name": "Honey Wheat Enriched Bread",
     "productId": "1",
-    "price": 2.99,
+    "price": "2.99",
     "image": "https://images.heb.com/is/image/HEBGrocery/000672610-1?id=lsORZ2&fmt=jpg&dpr=off&fit=constrain,1&wid=296&hei=296"
   },
   {
@@ -21,6 +21,6 @@
     "name": "Nonstick Fry Pan",
     "productId": "4",
     "price": "20.60",
-    "image": "https://images.heb.com/is/image/HEBGrocery/002044324-1?id=5YBR73&fmt=jpg&dpr=off&fit=constrain,1&wid=296&hei=296"
+    "image": "https://images.heb.com/is/image/HEBGrocery/006344009-1?id=SciSz0&fmt=jpg&dpr=off&fit=constrain,1&wid=196&hei=196"
   }
 ]
