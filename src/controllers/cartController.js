@@ -79,7 +79,7 @@ async function addToCart(req, res, next) {
       const data = await cart.save();
       return res.status(200).json({
         type: "success",
-        message: "Data Updated Successfully",
+        message: "Data updated successfully",
         data: data,
       });
     } else {
@@ -97,7 +97,11 @@ async function addToCart(req, res, next) {
       };
 
       const data = await createCart(newCart);
-      return res.json(data);
+      return res.status(201).json({
+        type: "success",
+        message: "Data created successfully",
+        data: data,
+      });
     }
   } catch (error) {
     console.log(error);
@@ -195,7 +199,7 @@ async function updateCart(req, res, next) {
         });
       } else {
         return res.status(500).json({
-          type: "Product not Found",
+          type: "Product not found",
           message: "Invalid request",
         });
       }

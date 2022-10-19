@@ -6,8 +6,10 @@ const {
 
 const productRouter = express.Router();
 
-// router.get("/", controller.getCart);
+//get all products
 productRouter.get("/", getAllProducts);
+
+//get product
 productRouter.get("/:productId", getProduct);
 
 module.exports = { productRouter };
